@@ -9,7 +9,9 @@ Daniel Zügner
 Technical University of Munich
 """
 
-import tensorflow as tf
+#import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 from netgan import utils
 import time
 import numpy as np
@@ -106,6 +108,7 @@ class NetGAN:
         assert rw_len > 1, "Random walk length must be > 1."
 
         tf.set_random_seed(seed)
+        #tf.random.set_seed(seed)
 
         self.N = N
         self.rw_len = rw_len
@@ -119,16 +122,16 @@ class NetGAN:
         self.W_down_generator = tf.get_variable('Generator.W_Down',
                                                 shape=[self.N, self.params['W_Down_Generator_size']],
                                                 dtype=tf.float32,
-                                                initializer=tf.contrib.layers.xavier_initializer())
+                                                initializer=tf.glorot_uniform_initializer())
 
         self.W_down_discriminator = tf.get_variable('Discriminator.W_Down',
                                                     shape=[self.N, self.params['W_Down_Discriminator_size']],
                                                     dtype=tf.float32,
-                                                    initializer=tf.contrib.layers.xavier_initializer())
+                                                    initializer=tf.glorot_uniform_initializer())
 
         self.W_up = tf.get_variable("Generator.W_up", shape = [self.G_layers[-1], self.N],
                                     dtype=tf.float32,
-                                    initializer=tf.contrib.layers.xavier_initializer())
+                                    initializer=tf.glorot_uniform_initializer())
 
         self.b_W_up = tf.get_variable("Generator.W_up_bias", dtype=tf.float32, initializer=tf.zeros_initializer,
                                       shape=self.N)
@@ -257,9 +260,9 @@ class NetGAN:
                 scope.reuse_variables()
 
             def lstm_cell(lstm_size):
-                return tf.contrib.rnn.BasicLSTMCell(lstm_size, reuse=tf.get_variable_scope().reuse)
+                return tf.compat.v1.nn.rnn_cell.BasicLSTMCell(lstm_size, reuse=tf.get_variable_scope().reuse)
 
-            self.stacked_lstm = tf.contrib.rnn.MultiRNNCell([lstm_cell(size) for size in self.G_layers])
+            self.stacked_lstm = tf.compat.v1.nn.rnn_cell.MultiRNNCell([lstm_cell(size) for size in self.G_layers])
 
             # initial states h and c are randomly sampled for each lstm cell
             if z is None:
@@ -280,7 +283,7 @@ class NetGAN:
                                                      reuse=reuse, activation=tf.nn.tanh)
                     c = tf.layers.dense(c_intermediate, size, name="Generator.c_{}".format(ix+1), reuse=reuse,
                                         activation=tf.nn.tanh)
-                    
+
                 else:
                     intermediate = tf.layers.dense(initial_states_noise, size, name="Generator.int_{}".format(ix+1),
                                                      reuse=reuse, activation=tf.nn.tanh)
@@ -344,11 +347,11 @@ class NetGAN:
             output = tf.reshape(output, [-1, self.rw_len, int(self.W_down_discriminator.get_shape()[-1])])
 
             def lstm_cell(lstm_size):
-                return tf.contrib.rnn.BasicLSTMCell(lstm_size, reuse=tf.get_variable_scope().reuse)
+                return tf.compat.v1.nn.rnn_cell.BasicLSTMCell(lstm_size, reuse=tf.get_variable_scope().reuse)
 
-            disc_lstm_cell = tf.contrib.rnn.MultiRNNCell([lstm_cell(size) for size in self.D_layers])
+            disc_lstm_cell = tf.compat.v1.nn.rnn_cell.MultiRNNCell([lstm_cell(size) for size in self.D_layers])
 
-            output_disc, state_disc = tf.contrib.rnn.static_rnn(cell=disc_lstm_cell, inputs=tf.unstack(output, axis=1),
+            output_disc, state_disc = tf.compat.v1.nn.static_rnn(cell=disc_lstm_cell, inputs=tf.unstack(output, axis=1),
                                                               dtype='float32')
 
             last_output = output_disc[-1]

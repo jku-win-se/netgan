@@ -21,14 +21,12 @@ def fit(adj):
 
     val_share = 0.1
     test_share = 0.05
-    #seed = 481516234
 
     # split the graph into train/test/validation
     train_ones, val_ones, val_zeros, test_ones, test_zeros = utils.train_val_test_split_adjacency(adj, val_share, test_share, undirected=True, connected=True, asserts=True)
 
     # generate the training graph and ensure it is symmetric
-    #train_graph = sp.coo.matrix((np.ones(len(train_ones)), (train_ones[:, 0], train_ones[:,1]))).tocsr()
-    train_graph = sp.coo_matrix((np.ones(len(train_ones)),(train_ones[:,0], train_ones[:,1]))).tocsr()
+    train_graph = sp.coo_matrix((np.ones(len(train_ones)),(train_ones[:, 0],train_ones[:,1]))).tocsr()
     assert (train_graph.toarray() == train_graph.toarray().T).all()
 
     rw_len = 16
@@ -52,37 +50,43 @@ def fit(adj):
         stopping = None
 
     eval_every = 3
-    #plot_every = 2000
+    #max_iters = 30000
+    max_iters = 4
 
     # train the model
-    #log_dict = model.train(A_orig=adj, val_ones=val_ones, val_zeros=val_zeros, \
-    #        stopping=stopping, eval_every=eval_every, max_patience=5, max_iters=30000)
     log_dict = model.train(A_orig=adj, val_ones=val_ones, val_zeros=val_zeros, \
-            stopping=stopping, eval_every=eval_every, max_patience=5, max_iters=4)
+            stopping=stopping, eval_every=eval_every, max_patience=5, max_iters=max_iters)
 
     sample_walks = model.generate_discrete(10000, reuse=True)
 
     samples = []
     for x in range(60):
-        if (x + 1) % 10 == 0:
-            print(x + 1)
         samples.append(sample_walks.eval({model.tau: 0.5}))
-    #print(samples)
+        #if (x + 1) % 10 == 0:
+        #    print(x + 1)
 
     random_walks = np.array(samples).reshape([-1, rw_len])
     scores_matrix = utils.score_matrix_from_random_walks(random_walks, n).tocsr()
-    sampled_graph = utils.graph_from_scores(scores_matrix, train_graph.sum())
 
-    return sampled_graph
+    return scores_matrix, train_graph.sum()
+
+def gen(scores, tg_sum):
+    return utils.graph_from_scores(scores, tg_sum)
 
 def main():
     A, _X_obs, _z_obs = utils.load_npz('data/cora_ml.npz')
     A = A + A.T
     A[A > 1] = 1
 
-    scores = fit(A)
+    scores, tg_sum = fit(A)
 
-    print('--------------------------')
-    print(scores)
+    sampled_graph = gen(scores, tg_sum)
+    print(sampled_graph)
+    np.savetxt('wew2.dat', sampled_graph, fmt='%d')
+
+    #print('--------------------------')
+    #print(scores)
+    #print(tg_sum)
+    #np.save('./scores', scores)
 
 main()

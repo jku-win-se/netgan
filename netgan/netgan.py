@@ -10,13 +10,14 @@ Technical University of Munich
 """
 
 #import tensorflow as tf
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
 from netgan import utils
 import time
 import numpy as np
 from sklearn.metrics import roc_auc_score, average_precision_score
-import os
 from matplotlib import pyplot as plt
 
 class NetGAN:
@@ -247,7 +248,7 @@ class NetGAN:
         gumbel: bool, default: False
             Whether to use the gumbel softmax for generating discrete output.
         legacy: bool, default: False
-            If True, the hidden and cell states of the generator LSTM are initialized by two separate feed-forward networks. 
+            If True, the hidden and cell states of the generator LSTM are initialized by two separate feed-forward networks.
             If False (recommended), the hidden layer is shared, which has less parameters and performs just as good.
         Returns
         -------
@@ -260,9 +261,9 @@ class NetGAN:
                 scope.reuse_variables()
 
             def lstm_cell(lstm_size):
-                return tf.compat.v1.nn.rnn_cell.BasicLSTMCell(lstm_size, reuse=tf.get_variable_scope().reuse)
+                return tf.nn.rnn_cell.BasicLSTMCell(lstm_size, reuse=tf.get_variable_scope().reuse)
 
-            self.stacked_lstm = tf.compat.v1.nn.rnn_cell.MultiRNNCell([lstm_cell(size) for size in self.G_layers])
+            self.stacked_lstm = tf.nn.rnn_cell.MultiRNNCell([lstm_cell(size) for size in self.G_layers])
 
             # initial states h and c are randomly sampled for each lstm cell
             if z is None:
@@ -347,11 +348,11 @@ class NetGAN:
             output = tf.reshape(output, [-1, self.rw_len, int(self.W_down_discriminator.get_shape()[-1])])
 
             def lstm_cell(lstm_size):
-                return tf.compat.v1.nn.rnn_cell.BasicLSTMCell(lstm_size, reuse=tf.get_variable_scope().reuse)
+                return tf.nn.rnn_cell.BasicLSTMCell(lstm_size, reuse=tf.get_variable_scope().reuse)
 
-            disc_lstm_cell = tf.compat.v1.nn.rnn_cell.MultiRNNCell([lstm_cell(size) for size in self.D_layers])
+            disc_lstm_cell = tf.nn.rnn_cell.MultiRNNCell([lstm_cell(size) for size in self.D_layers])
 
-            output_disc, state_disc = tf.compat.v1.nn.static_rnn(cell=disc_lstm_cell, inputs=tf.unstack(output, axis=1),
+            output_disc, state_disc = tf.nn.static_rnn(cell=disc_lstm_cell, inputs=tf.unstack(output, axis=1),
                                                               dtype='float32')
 
             last_output = output_disc[-1]

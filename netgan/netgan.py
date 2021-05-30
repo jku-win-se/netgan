@@ -117,7 +117,7 @@ class NetGAN:
         self.noise_dim = self.params['noise_dim']
         self.G_layers = self.params['Generator_Layers']
         self.D_layers = self.params['Discriminator_Layers']
-        self.tau = tf.placeholder(1.0 , shape=(), name="temperature")
+        self.tau = tf.placeholder(1.0, shape=(), name="temperature")
 
         # W_down and W_up for generator and discriminator
         self.W_down_generator = tf.get_variable('Generator.W_Down',
@@ -318,6 +318,7 @@ class NetGAN:
                 # Back to dimension d
                 inputs = tf.matmul(output, self.W_down_generator)
 
+                print("this is output in generator_recurrent : ", output)
                 outputs.append(output)
             outputs = tf.stack(outputs, axis=1)
         return outputs

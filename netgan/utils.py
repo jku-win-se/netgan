@@ -1,5 +1,6 @@
 import networkx as nx
 import scipy.sparse as sp
+from netgan import graph_plotting
 import numpy as np
 from scipy.sparse.csgraph import connected_components, minimum_spanning_tree
 import warnings
@@ -340,6 +341,7 @@ def score_matrix_from_random_walks(random_walks, N, symmetric=True):
 
     mat = sp.coo_matrix((np.ones(bigrams.shape[0]), (bigrams[:, 0], bigrams[:, 1])),
                         shape=[N, N])
+    print("mat is equal: ", mat.shape)
     return mat
 
 @jit(nopython=True)

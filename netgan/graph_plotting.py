@@ -20,7 +20,7 @@ def plot_graph_from_sparse_matrix(sparse_matrix, draw_type="networkx"):
 
 def plot_graph(graph, draw_type="networkx"):
     """"
-        plot a graph
+        plot an input graph
     """
     # print(graph.shape)
     sparse_matrix = sp.csr_matrix(graph)

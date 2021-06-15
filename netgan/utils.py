@@ -1,6 +1,6 @@
 import networkx as nx
 import scipy.sparse as sp
-from netgan import graph_plotting
+from netgan import graph_utils
 import numpy as np
 from scipy.sparse.csgraph import connected_components, minimum_spanning_tree
 import warnings

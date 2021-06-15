@@ -46,4 +46,5 @@ def graph_similarity(sparse_matrix1, sparse_matrix2, r0, r1):
     #     nx.edge_match(g1, g2)
     # print("g1 and g2 are isomorphic? ", isomorphic)
     print("Edit distance between g1 and g2: ", edit_dis)
+    print("Edit distance between g1 and g2: ", edit_dis)
 

@@ -42,7 +42,7 @@ def graph_similarity(sparse_matrix1, sparse_matrix2, r0, r1):
 
     # isomorphic = nx.could_be_isomorphic(g1, g2)
     edit_dis = nx.graph_edit_distance(g1, g2, roots=(r0, r1))
-    # for i in g1.edges:
+    #  for i in g1.edges:
     #     nx.edge_match(g1, g2)
     # print("g1 and g2 are isomorphic? ", isomorphic)
     print("Edit distance between g1 and g2: ", edit_dis)

@@ -21,7 +21,7 @@ labels = [10, 11, 10, 10, 11, 10, 11, 11, 10, 10, 11, 10, 11, 11, 10, 10, 11, 10
 file_name = 'small_DS.npz'
 np.savez(file_name, adj_data=adj_data, adj_indices=adj_indices, adj_shape=adj_shape, adj_indptr=adj_indptr,
          attr_data=attr_data, attr_indices=attr_indices, attr_shape=attr_shape, attr_indptr=attr_indptr, labels=labels)
-# To load data we should change below line
+
 # adj_data = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 #             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 # adj_indices = [1, 4, 2, 3, 0, 1, 2, 1, 3, 6, 4]

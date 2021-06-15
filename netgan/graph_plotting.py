@@ -32,3 +32,18 @@ def plot_graph(graph, draw_type="networkx"):
     elif draw_type == "kamada_kawai":
         nx.draw_kamada_kawai(G)
     return
+
+
+def graph_similarity(sparse_matrix1, sparse_matrix2):
+
+    g1 = nx.from_scipy_sparse_matrix(sparse_matrix1)
+    sparse_matrix = sp.csr_matrix(sparse_matrix2)
+    g2 = nx.from_scipy_sparse_matrix(sparse_matrix)
+
+    isomorphic = nx.could_be_isomorphic(g1, g2)
+    edit_dis = nx.graph_edit_distance(g1, g2)
+    # for i in g1.edges:
+    #     nx.edge_match(g1, g2)
+    print("g1 and g2 are isomorphic? ", isomorphic)
+    print("Edit distance between g1 and g2: ", edit_dis)
+

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<car_wash:CarWash
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:car_wash="http://www.example.org/car_wash"
+    xsi:schemaLocation="http://www.example.org/car_wash car_wash.ecore"
+    name="James ">
+  <hasServise
+      s_name="ser1"
+      cost="100"/>
+  <hasServise
+      id="1"
+      s_name="serv2"
+      cost="75"/>
+  <hasServise
+      id="2"
+      s_name="serv3"
+      cost="130"/>
+  <hasServise
+      id="3"
+      s_name="serv4"/>
+  <hasServise
+      id="4"
+      s_name="serv5"/>
+  <hasServise
+      id="5"
+      s_name="serv6"/>
+  <hasServise
+      id="6"
+      s_name="serv7"/>
+  <hasServise
+      id="7"
+      s_name="serv8"/>
+  <hasServise
+      id="8"
+      s_name="serv9"/>
+  <hasServise
+      id="9"
+      s_name="serv10"/>
+  <hasServise
+      id="10"
+      s_name="serv11"/>
+  <hasServise
+      s_name="ser12"
+      cost="80"/>
+  <hasServise
+      s_name="ser13"
+      cost="70"/>
+  <hasServise
+      s_name="ser14"
+      cost="70"/>
+  <hasServise
+      s_name="ser15"
+      cost="70"/>
+  <hasServise
+      s_name="ser16"
+      cost="70"/>
+  <hasServise
+      s_name="ser17"
+      cost="70"/>
+  <hasServise
+      s_name="ser18"
+      cost="70"/>
+  <hasServise
+      s_name="ser19"
+      cost="70"/>
+  <hasServise
+      s_name="ser20"
+      cost="70"/>
+  <hasServise
+      s_name="ser21"
+      cost="70"/>
+  <hasServise
+      s_name="ser22"
+      cost="70"/>
+  <hasServise
+      s_name="ser23"
+      cost="70"/>
+  <hasServise
+      s_name="ser24"
+      cost="70"/>
+  <hasServise
+      s_name="ser25"
+      cost="70"/>
+  <hasCustomer
+      name="c1"
+      age="45">
+    <hasCar
+        colour="red"
+        receivedServices="//@hasServise.0"/>
+    <hasCar
+        colour="blue"
+        receivedServices="//@hasServise.17"/>
+    <hasCar
+        colour="white"
+        receivedServices="//@hasServise.1"/>
+  </hasCustomer>
+  <hasCustomer
+      name="c2"
+      id="1"
+      age="30">
+    <hasCar
+        colour="black"
+        receivedServices="//@hasServise.2"/>
+  </hasCustomer>
+  <hasCustomer
+      name="c3"
+      id="2">
+    <hasCar
+        id="2"
+        colour="black"
+        receivedServices="//@hasServise.3 //@hasServise.1 //@hasServise.12"/>
+  </hasCustomer>
+  <hasCustomer
+      name="c4"
+      id="3">
+    <hasCar
+        id="3"
+        colour="black"
+        receivedServices="//@hasServise.14 //@hasServise.4 //@hasServise.5"/>
+  </hasCustomer>
+  <hasCustomer
+      name="c5"
+      id="4">
+    <hasCar
+        id="4"
+        colour="red"
+        receivedServices="//@hasServise.5 //@hasServise.6 //@hasServise.7"/>
+    <hasCar
+        id="5"
+        colour="red"
+        receivedServices="//@hasServise.15 //@hasServise.10"/>
+    <hasCar
+        id="6"
+        colour="red"
+        receivedServices="//@hasServise.8 //@hasServise.9 //@hasServise.11"/>
+  </hasCustomer>
+  <hasCustomer
+      name="c6"
+      id="5">
+    <hasCar
+        id="7"
+        colour="black"
+        receivedServices="//@hasServise.18 //@hasServise.19 //@hasServise.20"/>
+    <hasCar
+        id="8"
+        colour="red"
+        receivedServices="//@hasServise.21 //@hasServise.22"/>
+    <hasCar
+        id="9"
+        colour="red"
+        receivedServices="//@hasServise.23 //@hasServise.24"/>
+  </hasCustomer>
+  <bill services="//@hasServise.0 //@hasServise.1"
+      customer="//@hasCustomer.0"/>
+  <bill id="1"
+      services="//@hasServise.2"
+      customer="//@hasCustomer.1"/>
+  <bill id="2"
+      services="//@hasServise.3 //@hasServise.7"
+      customer="//@hasCustomer.2"/>
+  <bill id="3"
+      services="//@hasServise.7 //@hasServise.8"
+      customer="//@hasCustomer.3"/>
+  <bill id="4"
+      services="//@hasServise.0 //@hasServise.7"
+      customer="//@hasCustomer.4"/>
+  <bill id="5"
+      services="//@hasServise.20 //@hasServise.21"
+      customer="//@hasCustomer.5"/>
+</car_wash:CarWash>

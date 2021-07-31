@@ -8,6 +8,8 @@ from matplotlib import pyplot as plt
 import igraph
 import powerlaw
 from numba import jit
+from netgan import encoder as encoder
+from netgan import decoder as decoder
 
 
 def load_npz(file_name):
@@ -30,28 +32,37 @@ def load_npz(file_name):
         # loader = dict(loader)['arr_0'].item()
         loader = dict(loader)
         adj_matrix = sp.csr_matrix((loader['adj_data'], loader['adj_indices'],
-                                              loader['adj_indptr']), shape=loader['adj_shape'])
+                                    loader['adj_indptr']), shape=loader['adj_shape'])
 
         if 'attr_data' in loader:
             attr_matrix = sp.csr_matrix((loader['attr_data'], loader['attr_indices'],
-                                                   loader['attr_indptr']), shape=loader['attr_shape'])
+                                         loader['attr_indptr']), shape=loader['attr_shape'])
         else:
             attr_matrix = None
 
         labels = loader.get('labels')
 
-    #print("start...adj_matrix.......")
-    #for row in adj_matrix:
-        #for elem in row:
-           # print(elem, end=' ')
-        #print()
-
-    #print("start.....attr_matrix.....")
-    #for row in attr_matrix:
-       #for elem in row:
-            #print(elem, end=' ')
-       #print()
     return adj_matrix, attr_matrix, labels
+
+
+def load_csr_from_model(mm_name, m_name):
+    print("Start loading csr from model. (utils.py-line 48)")
+    enc = encoder.ENCODE_M2G(metamodel_name=mm_name, model_name=m_name)
+    matrix = enc.c_sparse_matrix
+    out1, out2, out3, out4, out5, out6 = enc.prepare_decoder_data()
+    return matrix, out1, out2, out3, out4, out5, out6
+
+def create_model_based_on_graph(mm_root, classes, obj_attrs_dict, references_pair_dictionary, enum_dict, obj_types,
+                                adj_matrix):
+    sparse_matrix = sp.csr_matrix(adj_matrix)
+    file = open("sparse_matrix.txt", "w")
+    for i in adj_matrix:
+        print("adj_matrix:", str(i.tolist()))
+        file.write(str(i.tolist()) + "\n")
+    file.close
+    decoder.DECODE_G2M(mm_root, classes, obj_attrs_dict, references_pair_dictionary, enum_dict, obj_types,
+                       sparse_matrix.toarray())
+    print("It's done!!!(utils.py-line 54)")
 
 
 def largest_connected_components(adj, n_components=1):
@@ -75,7 +86,6 @@ def largest_connected_components(adj, n_components=1):
     components_to_keep = np.argsort(component_sizes)[::-1][:n_components]  # reverse order to sort descending
     nodes_to_keep = [
         idx for (idx, component) in enumerate(component_indices) if component in components_to_keep
-
 
     ]
     print("Selecting {0} largest connected components".format(n_components))
@@ -207,8 +217,9 @@ def train_val_test_split_adjacency(A, p_val=0.10, p_test=0.05, seed=0, neg_mul=1
                                                                   A[not_in_cover[d_nic > 0]].tolil().rows))))
 
                 if np.any(d_nic == 0):
-                    hold_edges_d0 = np.column_stack((np.row_stack(map(np.random.choice, A[:, not_in_cover[d_nic == 0]].T.tolil().rows)),
-                                                     not_in_cover[d_nic == 0]))
+                    hold_edges_d0 = np.column_stack(
+                        (np.row_stack(map(np.random.choice, A[:, not_in_cover[d_nic == 0]].T.tolil().rows)),
+                         not_in_cover[d_nic == 0]))
                     hold_edges = np.row_stack((hold_edges, hold_edges_d0, hold_edges_d1))
                 else:
                     hold_edges = np.row_stack((hold_edges, hold_edges_d1))
@@ -253,6 +264,7 @@ def train_val_test_split_adjacency(A, p_val=0.10, p_test=0.05, seed=0, neg_mul=1
         train_ones = np.row_stack((train_ones, np.column_stack(A_hold.nonzero())))
 
     n_test = len(test_ones) * neg_mul
+    print("test_ones: ", len(test_ones), "neg_mul: ", neg_mul)
     if set_ops:
         # generate slightly more completely random non-edge indices than needed and discard any that hit an edge
         # much faster compared a while loop
@@ -263,9 +275,15 @@ def train_val_test_split_adjacency(A, p_val=0.10, p_test=0.05, seed=0, neg_mul=1
         else:
             random_sample = np.random.randint(0, N, [int(1.3 * n_test), 2])
             random_sample = random_sample[random_sample[:, 0] != random_sample[:, 1]]
-
+        print("random_sample", len(random_sample), "_", random_sample.shape[0])
         test_zeros = random_sample[A[random_sample[:, 0], random_sample[:, 1]].A1 == 0]
+        print("test_zeros02: ", len(A[random_sample[:, 0], random_sample[:, 1]]))
+        print("random_sample[:, 0]: ", random_sample[:, 0])
+        print("random_sample[:, 1]: ", random_sample[:, 1])
+        print("test_zeros0: ", len(test_zeros))
         test_zeros = np.row_stack(test_zeros)[:n_test]
+        print("test_zeros1: ", len(test_zeros))
+        print("n_test:", n_test, "test_zeros.shape[0]:", test_zeros.shape[0])
         assert test_zeros.shape[0] == n_test
     else:
         test_zeros = []
@@ -344,22 +362,23 @@ def score_matrix_from_random_walks(random_walks, N, symmetric=True):
     print("mat is equal: ", mat.shape)
     return mat
 
+
 @jit(nopython=True)
 def random_walk(edges, node_ixs, rwlen, p=1, q=1, n_walks=1):
-    N=len(node_ixs)
-    
+    N = len(node_ixs)
+
     walk = []
     prev_nbs = None
     for w in range(n_walks):
         source_node = np.random.choice(N)
         walk.append(source_node)
-        for it in range(rwlen-1):
-            
-            if walk[-1] == N-1:
-                nbs = edges[node_ixs[walk[-1]]::,1]
+        for it in range(rwlen - 1):
+
+            if walk[-1] == N - 1:
+                nbs = edges[node_ixs[walk[-1]]::, 1]
             else:
-                nbs = edges[node_ixs[walk[-1]]:node_ixs[walk[-1]+1],1]
-                
+                nbs = edges[node_ixs[walk[-1]]:node_ixs[walk[-1] + 1], 1]
+
             if it == 0:
                 walk.append(np.random.choice(nbs))
                 prev_nbs = set(nbs)
@@ -373,22 +392,24 @@ def random_walk(edges, node_ixs, rwlen, p=1, q=1, n_walks=1):
             is_dist_0 = nbs == walk[-2]
             is_dist_2 = 1 - is_dist_1_np - is_dist_0
 
-            alpha_pq = is_dist_0 / p + is_dist_1_np + is_dist_2/q
-            alpha_pq_norm = alpha_pq/np.sum(alpha_pq)
+            alpha_pq = is_dist_0 / p + is_dist_1_np + is_dist_2 / q
+            alpha_pq_norm = alpha_pq / np.sum(alpha_pq)
             rdm_num = np.random.rand()
             cumsum = np.cumsum(alpha_pq_norm)
-            nxt = nbs[np.sum(1-(cumsum > rdm_num))]
+            nxt = nbs[np.sum(1 - (cumsum > rdm_num))]
             walk.append(nxt)
             prev_nbs = set(nbs)
     return np.array(walk)
+
 
 class RandomWalker:
     """
     Helper class to generate random walks on the input adjacency matrix.
     """
+
     def __init__(self, adj, rw_len, p=1, q=1, batch_size=128):
         self.adj = adj
-        #if not "lil" in str(type(adj)):
+        # if not "lil" in str(type(adj)):
         #    warnings.warn("Input adjacency matrix not in lil format. Converting it to lil.")
         #    self.adj = self.adj.tolil()
 
@@ -401,8 +422,8 @@ class RandomWalker:
 
     def walk(self):
         while True:
-            yield random_walk(self.edges, self.node_ixs, self.rw_len, self.p, self.q, self.batch_size).reshape([-1, self.rw_len])
-
+            yield random_walk(self.edges, self.node_ixs, self.rw_len, self.p, self.q, self.batch_size).reshape(
+                [-1, self.rw_len])
 
 
 def edge_overlap(A, B):
@@ -444,19 +465,19 @@ def graph_from_scores(scores, n_edges):
 
     """
 
-    if  len(scores.nonzero()[0]) < n_edges:
+    if len(scores.nonzero()[0]) < n_edges:
         return symmetric(scores) > 0
 
-    target_g = np.zeros(scores.shape) # initialize target graph
-    scores_int = scores.toarray().copy() # internal copy of the scores matrix
+    target_g = np.zeros(scores.shape)  # initialize target graph
+    scores_int = scores.toarray().copy()  # internal copy of the scores matrix
     scores_int[np.diag_indices_from(scores_int)] = 0  # set diagonal to zero
-    degrees_int = scores_int.sum(0)   # The row sum over the scores.
+    degrees_int = scores_int.sum(0)  # The row sum over the scores.
 
     N = scores.shape[0]
 
-    for n in np.random.choice(N, replace=False, size=N): # Iterate the nodes in random order
+    for n in np.random.choice(N, replace=False, size=N):  # Iterate the nodes in random order
 
-        row = scores_int[n,:].copy()
+        row = scores_int[n, :].copy()
         if row.sum() == 0:
             continue
 
@@ -466,10 +487,8 @@ def graph_from_scores(scores, n_edges):
         target_g[n, target] = 1
         target_g[target, n] = 1
 
-
-    diff = np.round((n_edges - target_g.sum())/2)
+    diff = np.round((n_edges - target_g.sum()) / 2)
     if diff > 0:
-
         triu = np.triu(scores_int)
         triu[target_g > 0] = 0
         triu[np.diag_indices_from(scores_int)] = 0
@@ -506,6 +525,7 @@ def symmetric(directed_adjacency, clip_to_one=True):
     if clip_to_one:
         A_symmetric[A_symmetric > 1] = 1
     return A_symmetric
+
 
 def squares(g):
     """
@@ -653,7 +673,7 @@ def statistics_power_law_alpha(A_in):
     """
 
     degrees = A_in.sum(axis=0)
-    return powerlaw.Fit(degrees, xmin=max(np.min(degrees),1)).power_law.alpha
+    return powerlaw.Fit(degrees, xmin=max(np.min(degrees), 1)).power_law.alpha
 
 
 def statistics_gini(A_in):
@@ -674,7 +694,7 @@ def statistics_gini(A_in):
     degrees = A_in.sum(axis=0)
     degrees_sorted = np.sort(degrees)
     G = (2 * np.sum(np.array([i * degrees_sorted[i] for i in range(len(degrees))]))) / (n * np.sum(degrees)) - (
-                                                                                                               n + 1) / n
+            n + 1) / n
     return float(G)
 
 
@@ -696,22 +716,24 @@ def statistics_edge_distribution_entropy(A_in):
     m = 0.5 * np.sum(np.square(A_in))
     n = A_in.shape[0]
 
-    H_er = 1 / np.log(n) * np.sum(-degrees / (2 * float(m)) * np.log((degrees+.0001) / (2 * float(m))))
+    H_er = 1 / np.log(n) * np.sum(-degrees / (2 * float(m)) * np.log((degrees + .0001) / (2 * float(m))))
     return H_er
+
 
 def statistics_cluster_props(A, Z_obs):
     def get_blocks(A_in, Z_obs, normalize=True):
         block = Z_obs.T.dot(A_in.dot(Z_obs))
         counts = np.sum(Z_obs, axis=0)
-        blocks_outer = counts[:,None].dot(counts[None,:])
+        blocks_outer = counts[:, None].dot(counts[None, :])
         if normalize:
-            blocks_outer = np.multiply(block, 1/blocks_outer)
+            blocks_outer = np.multiply(block, 1 / blocks_outer)
         return blocks_outer
-    
+
     in_blocks = get_blocks(A, Z_obs)
     diag_mean = np.multiply(in_blocks, np.eye(in_blocks.shape[0])).mean()
-    offdiag_mean = np.multiply(in_blocks, 1-np.eye(in_blocks.shape[0])).mean() 
+    offdiag_mean = np.multiply(in_blocks, 1 - np.eye(in_blocks.shape[0])).mean()
     return diag_mean, offdiag_mean
+
 
 def statistics_compute_cpl(A):
     """Compute characteristic path length."""
@@ -795,15 +817,13 @@ def compute_graph_statistics(A_in, Z_obs=None):
 
     # Number of connected components
     statistics['n_components'] = connected_components(A)[0]
-    
+
     if Z_obs is not None:
         # inter- and intra-community density
         intra, inter = statistics_cluster_props(A, Z_obs)
         statistics['intra_community_density'] = intra
         statistics['inter_community_density'] = inter
-      
+
     statistics['cpl'] = statistics_compute_cpl(A)
 
     return statistics
-
-

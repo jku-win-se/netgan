@@ -73,7 +73,7 @@ class DECODE_G2M:
             print("pair_dict11: ", k, ":", self.references_pair_dictionary[k])
         n = len(elements)
         for i in range(0, n):
-            for j in range(i, n):
+            for j in range(0, n):
                 if adj_matrix[i][j] > 0:
                     rel_dict = self.references_pair_dictionary[generated_model_type_list[i]]
                     if len(rel_dict) > 0:

@@ -17,7 +17,7 @@ def create_xmi_file(root):
     resource = XMIResource(URI('initial.xmi'))
     resource.append(root)  # We add the root to the resource
     resource.save()  # will save the result in 'initial.xmi'
-    resource.save(output=URI('output/output' + time + '.xmi'))  # save the result in 'output.xmi'
+    resource.save(output=URI('output/' + root.eClass.name + time + '.xmi'))  # save the result in 'output.xmi'
 
 
 class DECODE_G2M:
@@ -35,10 +35,6 @@ class DECODE_G2M:
         self.obj_attrs_dict = obj_attrs_dict
         self.references_pair_dictionary = references_pair_dictionary
         self.enum_dict = enum_dict
-        # obj_types = ["Family", "Member", "Member", "Address", "Address"]
-        # adj_matrix = [[0, 1, 1, 1, 1], [1, 0, 0, 0, 0]
-        #     , [1, 0, 0, 0, 0], [1, 0, 0, 0, 0], [1, 0, 0, 0, 0]]
-        # self.create_initial_objects(obj_types, adj_matrix)
         self.create_initial_objects(self.get_obj_types(obj_types), adj_matrix)
 
     def get_obj_types(self, node_types):
@@ -66,11 +62,8 @@ class DECODE_G2M:
         for obj_type in generated_model_type_list:
             new_obj = init_objects[obj_type].eClass()
             new_obj = self.set_obj_attrs(new_obj)
-            print("new::",new_obj.eClass.name)
             elements.append(new_obj)
 
-        for k in self.references_pair_dictionary:
-            print("pair_dict11: ", k, ":", self.references_pair_dictionary[k])
         n = len(elements)
         for i in range(0, n):
             for j in range(0, n):

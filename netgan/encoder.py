@@ -12,6 +12,7 @@ from pyecore.resources.xmi import XMIResource
 from scipy.sparse import csr_matrix
 import numpy
 import itertools
+from netgan import decoder
 
 
 def rollback_temporary_change(exp_ref):
@@ -65,14 +66,14 @@ class ENCODE_M2G:
             output = self.create_matrix()
             # create_triple_file(output, model_name, self.node_types)
             adj_matrix = self.create_square_matrix(output)
-            self.show_details()
-            # self.prepare_decoder_data(adj_matrix)
+            self.prepare_decoder_data()
+            # self.show_details()
         except pyecore.valuecontainer.BadValueError:
             raise Exception("Sorry, Pyecore cannot pars the xmi file. please check the order of inside element.")
         rollback_temporary_change(exp_refs)
 
     def prepare_decoder_data(self):
-        return self.mm_root, self.classes, self.obj_attrs_dict, self.references_pair_dictionary, self.enum_dict,\
+        return self.mm_root, self.classes, self.obj_attrs_dict, self.references_pair_dictionary, self.enum_dict, \
                self.node_types
 
     def show_details(self):
@@ -154,14 +155,12 @@ class ENCODE_M2G:
             if ref.eClass.name == "EReference":  # Extracting inner relations
                 pair_references.append([ref.eType.name, ref.name])
                 inner_references.append(ref.name)
-                print("_________e_class", e_class.name ,"reference: ", ref.name)
                 if ref.name not in self.references_type_mapping:
                     self.references_type_mapping.update({ref.name: next(self.map_iter)})
                 if ref.containment:
                     true_containment_classes.append(ref.name)
             elif ref.eClass.name == "EAttribute":
                 obj_attrs_dict.append([ref.name, ref.eType.name])
-                print("e_class.name", e_class.name, "ref.name: ", ref.name, " type:", ref.eType.name)
 
         # Creating references dictionary for the class
         references_dictionary = {e_class.name: inner_references}
@@ -199,7 +198,6 @@ class ENCODE_M2G:
                         obj._internal_id = next(self.id_iter)  # Getting an ID for assigning to each element
                         self.node_types.append([obj._internal_id, self.classes[obj.eClass.name]])
                         self.objects.append(obj)
-                        print("extract_objects_form_model. (encoder-line204):",obj._internal_id)
                         for inner_class_name in self.true_containment_classes:
                             if hasattr(obj, inner_class_name):
                                 self.extract_objects_form_model(obj)
@@ -209,14 +207,12 @@ class ENCODE_M2G:
                 self.node_types.append([all_instances_by_same_class_name._internal_id,
                                         self.classes[all_instances_by_same_class_name._containment_feature.eType.name]])
                 self.objects.append(all_instances_by_same_class_name)
-                print("extract_objects_form_model. (encoder-line215):", all_instances_by_same_class_name._internal_id)
                 for inner_class_name in self.true_containment_classes:
                     if hasattr(all_instances_by_same_class_name, inner_class_name):
                         self.extract_objects_form_model(all_instances_by_same_class_name)
 
     def create_matrix(self):
         # Create an empty 2D[len(input),len(input)] array as a matrix
-        print("hahahaha",len(self.objects))
         self.matrix_of_graph = numpy.zeros(
             (len(self.objects) + 1, len(self.objects) + 1))
         for obj in self.objects:
@@ -245,8 +241,6 @@ class ENCODE_M2G:
                             self.matrix_of_graph[obj._internal_id][inner_element._internal_id] = \
                                 self.references_type_mapping[inner_ref_name]
                     else:  # If we have a set of inside elements
-                        print("seek_in_depth matrix:", self.matrix_of_graph.shape)
-                        print("seek_in_depth matrix:", obj._container._internal_id,"__",obj._internal_id)
                         if self.matrix_of_graph[obj._container._internal_id][
                             obj._internal_id] == 0 and obj._container._internal_id == 0:
                             self.check_and_add_relations_with_root(obj)
@@ -292,8 +286,10 @@ def create_triple_file(matrix, ds_name, labels):
     :param ds_name: data set name
     :param labels: list of node labels (object types)
     """
+    if ds_name.endswith('.xmi'):
+        ds_name = ds_name[:-4]
     first_line = True
-    with open(ds_name + '_triple.dat', 'w') as f:
+    with open('../output_DS/'+ds_name + '_triple.dat', 'w') as f:
         for idx, row in enumerate(matrix):
             for idy, val in enumerate(row):
                 if val > 0:
@@ -303,7 +299,7 @@ def create_triple_file(matrix, ds_name, labels):
                     f.write(line)
                     first_line = False
     first_line = True
-    with open(ds_name + '_label.dat', 'w') as file:
+    with open('../output_DS/'+ds_name + '_label.dat', 'w') as file:
         for i in labels:
             line = "\n" + str(i[0]) + "  " + str(i[1])
             if first_line:
@@ -332,7 +328,7 @@ def append_items2list(input_list, cumulative_list):
 if __name__ == "__main__":
     # ENCODE_M2G(metamodel_name="x2.ecore", model_name="result999_1.xmi")
     # ENCODE_M2G(metamodel_name="x1.ecore", model_name="result0_1.xmi")
-    ENCODE_M2G(metamodel_name="car_wash.ecore", model_name="CarWash01.xmi")
+    ENCODE_M2G(metamodel_name="car_wash.ecore", model_name="CarWash03.xmi")
     # ENCODE_M2G(metamodel_name="AIDS.ecore", model_name="graph2.xmi")
     # ENCODE_M2G(metamodel_name="Tree.ecore", model_name="tree.xmi")
     # ENCODE_M2G(metamodel_name="fsa.ecore", model_name="FSAModel.xmi")

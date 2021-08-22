@@ -18,7 +18,6 @@ import numpy as np
 import xlrd
 
 
-
 def rollback_temporary_change(exp_ref):
     if len(exp_ref) > 0:
         for ref in exp_ref:
@@ -330,5 +329,3 @@ def append_items2list(input_list, cumulative_list):
     for item in input_list:
         cumulative_list.append(item)
     return cumulative_list
-
-

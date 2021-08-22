@@ -1,2 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<www.basicfamilyMM.com:FamilyRoot xmlns:xmi="http://www.omg.org/XMI" xmlns:www.basicfamilyMM.com="www.basicfamilyMM.com" name="name1" xmi:version="2.0"/>
+<car_wash:CarWash xmlns:xmi="http://www.omg.org/XMI" xmlns:car_wash="http://www.example.org/car_wash" name="name715" xmi:version="2.0">
+  <hasService s_name="s_name716" id="40" cost="19"/>
+  <hasService s_name="s_name717" id="28" cost="29"/>
+  <hasService s_name="s_name718" id="56" cost="43"/>
+  <hasService s_name="s_name720" id="76" cost="21"/>
+  <hasService s_name="s_name721" id="38" cost="73"/>
+  <hasService s_name="s_name723" id="53" cost="74"/>
+  <hasService s_name="s_name727" id="10" cost="19"/>
+  <hasService s_name="s_name729" id="47" cost="48"/>
+  <hasCustomer age="34" id="35" name="name740">
+    <hasCar colour="colour741" id="17" receivedServices="//@hasService.0 //@hasService.5  "/>
+    <hasCar colour="colour742" id="30" receivedServices=" "/>
+  </hasCustomer>
+  <bill total_cost="48" id="41"/>
+  <bill total_cost="56" services="//@hasService.0 //@hasService.5" customer=" //@hasCustomer.0" id="67"/>
+</car_wash:CarWash>

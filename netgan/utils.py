@@ -45,24 +45,145 @@ def load_npz(file_name):
     return adj_matrix, attr_matrix, labels
 
 
+def node_activity(matrix, ref_types):
+    mtx_len = matrix.shape[0]
+    ref_types_len = len(ref_types)
+    active_vectors = np.zeros((mtx_len, ref_types_len))
+
+    for i in range(0, mtx_len, 1):
+        for r in range(0, ref_types_len, 1):
+            if ref_types[r] in matrix[i]:
+                active_vectors[i][r] = 1
+
+    # print("node_activity mean=", active_vectors.sum() / mtx_len)
+    return active_vectors.sum() / mtx_len
+
+
+def node_references_activity(matrix, ref_types):
+    dimensions = np.zeros(len(ref_types))
+    for r in range(0, len(ref_types), 1):
+        for i in matrix:
+            if ref_types[r] in i:
+                dimensions[r] += 1
+    # print("Node references activity mean=", dimensions.mean() / len(ref_types))
+    return dimensions.mean() / len(ref_types)
+
+
+def edge_references_activity(matrix, ref_types):
+    dimensions = np.zeros(len(ref_types))
+    for r in range(0, len(ref_types), 1):
+        for i in matrix:
+            for ent in i:
+                if ent == ref_types[r]:
+                    dimensions[r] += 1
+    return dimensions.mean() / len(ref_types)
+
+
+def multiplex_participation_coefficient(matrix, ref_types):
+    """
+    Calculating average of multiplex participation coefficient over all input graph nodes
+    :param matrix: typed matrix
+    :param ref_mapping: references mapping dictionary
+    """
+    mtx_len = matrix.shape[0]
+    R = len(ref_types)
+    # print("References length:", R, "matrix length:", mtx_len)
+    degrees = np.count_nonzero(matrix, axis=0)
+    temp = 0
+    MPC = np.zeros(mtx_len)
+    for i in range(0, mtx_len, 1):
+        sigma = 0
+        for r in ref_types:
+            for ent in matrix[i]:
+                if ent == r:
+                    temp += 1
+            sigma += pow((temp / degrees[i]), 2)
+            temp = 0
+        MPC[i] = (R / (R - 1)) * (1 - sigma)
+    # print("MPC mean=", MPC.mean())
+    return MPC.mean()
+
+
+def pairwise_multiplexity(matrix, ref_types):
+    """
+    Calculating Pairwise Multiplexity over all reference pair
+    :param matrix: typed matrix
+    :param ref_mapping: references mapping dictionary
+    """
+    mtx_len = matrix.shape[0]
+    ref_types_len = len(ref_types)
+    active_vectors = np.zeros((mtx_len, ref_types_len))
+
+    for i in range(0, mtx_len, 1):
+        for r in range(0, ref_types_len, 1):
+            if ref_types[r] in matrix[i]:
+                active_vectors[i][r] = 1
+    Q = list()
+    for i in range(0, ref_types_len, 1):
+        for j in range(i + 1, ref_types_len, 1):
+            sigma = 0
+            for r in active_vectors:
+                sigma += r[i] * r[j]
+            Q.append(sigma / mtx_len)
+    # print("Q mean=", np.asarray(Q).mean())
+    return np.asarray(Q).mean()
+
+
+def degrees_statistics(matrix):
+    """
+    Compute min, max, mean degree
+
+    Parameters
+    ----------
+    matrix: sparse matrix or np.array
+          The input adjacency matrix.
+    Returns
+    -------
+    d_max. d_min, d_mean
+    """
+
+    degrees = np.count_nonzero(matrix, axis=0)
+    return np.max(degrees), np.min(degrees), np.mean(degrees)
+
+
 def load_csr_from_model(mm_name, m_name):
-    print("Start loading csr from model. (utils.py-line 48)")
+    print("Start loading csr from model. (utils.py-line 151)")
     enc = encoder.ENCODE_M2G(metamodel_name=mm_name, model_name=m_name)
     matrix = enc.c_sparse_matrix
-    out1, out2, out3, out4, out5, out6 = enc.prepare_decoder_data()
-    return matrix, out1, out2, out3, out4, out5, out6
+    out1, out2, out3, out4, out5, out6, out7 = enc.prepare_decoder_data()
+    return matrix, out1, out2, out3, out4, out5, out6, out7
 
-def create_model_based_on_graph(mm_root, classes, obj_attrs_dict, references_pair_dictionary, enum_dict, obj_types,
+
+def create_model_based_on_graph(mm_root, classes, obj_attrs_dict, references_type_mapping,
+                                references_pair_dictionary, enum_dict, obj_types,
                                 adj_matrix):
     sparse_matrix = sp.csr_matrix(adj_matrix)
     file = open("sparse_matrix.txt", "w")
     for i in adj_matrix:
-        print("adj_matrix:", str(i.tolist()))
+        # print("adj_matrix:", str(i.tolist()))
         file.write(str(i.tolist()) + "\n")
     file.close
-    decoder.DECODE_G2M(mm_root, classes, obj_attrs_dict, references_pair_dictionary, enum_dict, obj_types,
-                       sparse_matrix.toarray())
-    print("It's done!!!(utils.py-line 54)")
+    adjacency_matrix = sparse_matrix.toarray()
+    decoder.DECODE_G2M(mm_root, classes, obj_attrs_dict, references_type_mapping,
+                       references_pair_dictionary, enum_dict, obj_types, adjacency_matrix)
+    mapping_list = list(references_type_mapping.items())
+    ref_types = []
+    for i in mapping_list:
+        ref_types.append(i[1])
+    # print("Degrees statistics(max,min,mean)=", degrees_statistics(adjacency_matrix))
+    # print("Node activity=", node_activity(adjacency_matrix, ref_types))
+    # print("Node references activity=", node_references_activity(adjacency_matrix, ref_types))
+    # print("Edge references activity=", edge_references_activity(adjacency_matrix, ref_types))
+    # print("Multiplex participation coefficient=",
+    #       multiplex_participation_coefficient(adjacency_matrix, ref_types))
+    # print("Pairwise multiplexity=", pairwise_multiplexity(adjacency_matrix, ref_types))
+    print(degrees_statistics(adjacency_matrix))
+    print(node_activity(adjacency_matrix, ref_types))
+    print(node_references_activity(adjacency_matrix, ref_types))
+    print(edge_references_activity(adjacency_matrix, ref_types))
+    print(multiplex_participation_coefficient(adjacency_matrix, ref_types))
+    print(pairwise_multiplexity(adjacency_matrix, ref_types))
+    print("It's done!!!")
 
 
 def largest_connected_components(adj, n_components=1):
@@ -270,19 +391,14 @@ def train_val_test_split_adjacency(A, p_val=0.10, p_test=0.05, seed=0, neg_mul=1
         # much faster compared a while loop
         # in the future: estimate the multiplicity (currently fixed 1.3/2.3) based on A_obs.nnz
         if undirected:
-            random_sample = np.random.randint(0, N, [int(2.3 * n_test), 2])
+            random_sample = np.random.randint(0, N, [int(2.5 * n_test), 2])
             random_sample = random_sample[random_sample[:, 0] > random_sample[:, 1]]
         else:
-            random_sample = np.random.randint(0, N, [int(1.3 * n_test), 2])
+            print("[int(1.5 * n_test), 2]",[int(1.5 * n_test), 2])
+            random_sample = np.random.randint(0, N, [int(1.5 * n_test), 2])
             random_sample = random_sample[random_sample[:, 0] != random_sample[:, 1]]
-        print("random_sample", len(random_sample), "_", random_sample.shape[0])
         test_zeros = random_sample[A[random_sample[:, 0], random_sample[:, 1]].A1 == 0]
-        print("test_zeros02: ", len(A[random_sample[:, 0], random_sample[:, 1]]))
-        print("random_sample[:, 0]: ", random_sample[:, 0])
-        print("random_sample[:, 1]: ", random_sample[:, 1])
-        print("test_zeros0: ", len(test_zeros))
         test_zeros = np.row_stack(test_zeros)[:n_test]
-        print("test_zeros1: ", len(test_zeros))
         print("n_test:", n_test, "test_zeros.shape[0]:", test_zeros.shape[0])
         assert test_zeros.shape[0] == n_test
     else:
@@ -771,7 +887,8 @@ def compute_graph_statistics(A_in, Z_obs=None):
     """
 
     A = A_in.copy()
-
+    # print("A:",A)
+    # print("A.T:", A.T)
     assert ((A == A.T).all())
     A_graph = nx.from_numpy_matrix(A).to_undirected()
 
@@ -798,7 +915,7 @@ def compute_graph_statistics(A_in, Z_obs=None):
     statistics['triangle_count'] = statistics_triangle_count(A)
 
     # Square count
-    statistics['square_count'] = statistics_square_count(A)
+    # statistics['square_count'] = statistics_square_count(A)
 
     # power law exponent
     statistics['power_law_exp'] = statistics_power_law_alpha(A)
@@ -827,3 +944,28 @@ def compute_graph_statistics(A_in, Z_obs=None):
     statistics['cpl'] = statistics_compute_cpl(A)
 
     return statistics
+
+
+if __name__ == "__main__":
+    row = np.array([1, 0, 0, 2, 6, 2, 3, 1, 3, 0, 1, 4, 2, 4, 6, 1, 5, 2])
+    col = np.array([0, 1, 2, 0, 2, 6, 1, 3, 0, 3, 4, 1, 4, 2, 1, 6, 2, 5])
+    data = np.array([1, 1, 1, 1, 2, 2, 3, 3, 1, 1, 3, 3, 2, 2, 3, 3, 2, 2])
+    # data = np.array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
+    g = sp.csr_matrix((data, (row, col)), shape=(7, 7)).toarray()
+    print(g)
+    max_d, min_d, mean_d = degrees_statistics(g)
+    print("max_d=", max_d, "\nmin_d=", min_d, "\nmean_d=", mean_d)
+    ref = {"root": ["hasperson"], "man": ["hasfather", "hasmother"], "woman": ["hasfather", "hasmother"]}
+    node_types = ["root", "man", "woman", "man", "man", "woman", "woman"]
+    ref_mapping = {"hasperson": 1, "hasmother": 2, "hasfather": 3}
+
+    mapping_list = list(ref_mapping.items())
+    ref_types = []
+    for i in mapping_list:
+        ref_types.append(i[1])
+    # print("degrees_statistics=", degrees_statistics(g))
+    # multiplex_participation_coefficient(g,ref_types)
+    # pairwise_multiplexity(g, ref_types)
+    node_activity(g, ref_types)
+    # node_references_activity(g, ref_types)
+    # edge_references_activity(g, ref_types)

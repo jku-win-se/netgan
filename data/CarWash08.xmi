@@ -41,15 +41,24 @@
   <hasService
       id="10"
       s_name="serv11"/>
+  <hasService
+      id="11"
+      s_name="serv11"/>
   <hasCustomer
       name="c1"
       age="45">
     <hasCar
         colour="red"
+        receivedServices="//@hasService.0 //@hasService.11"/>
+    <hasCar
+        colour="white"
+        receivedServices="//@hasService.11 //@hasService.9"/>
+    <hasCar
+        colour="white"
         receivedServices="//@hasService.0"/>
     <hasCar
         colour="white"
-        receivedServices="//@hasService.1"/>
+        receivedServices="//@hasService.9 //@hasService.1 //@hasService.11 //@hasService.8"/>
   </hasCustomer>
   <hasCustomer
       name="c2"
@@ -57,7 +66,7 @@
       age="30">
     <hasCar
         colour="black"
-        receivedServices="//@hasService.2"/>
+        receivedServices="//@hasService.2 //@hasService.1 //@hasService.0"/>
   </hasCustomer>
   <hasCustomer
       name="c3"
@@ -65,7 +74,7 @@
     <hasCar
         id="2"
         colour="black"
-        receivedServices="//@hasService.3 //@hasService.1"/>
+        receivedServices="//@hasService.3 //@hasService.1 //@hasService.0"/>
   </hasCustomer>
   <hasCustomer
       name="c4"
@@ -73,7 +82,7 @@
     <hasCar
         id="3"
         colour="black"
-        receivedServices="//@hasService.3 //@hasService.4 //@hasService.5"/>
+        receivedServices="//@hasService.3 //@hasService.4 //@hasService.0 //@hasService.5"/>
   </hasCustomer>
   <hasCustomer
       name="c5"
@@ -81,7 +90,7 @@
     <hasCar
         id="4"
         colour="red"
-        receivedServices="//@hasService.5 //@hasService.6 //@hasService.7"/>
+        receivedServices="//@hasService.5 //@hasService.6"/>
     <hasCar
         id="5"
         colour="red"
@@ -89,20 +98,20 @@
     <hasCar
         id="6"
         colour="red"
-        receivedServices="//@hasService.8 //@hasService.9"/>
+        receivedServices="//@hasService.8 //@hasService.9 //@hasService.0"/>
   </hasCustomer>
-  <bill services="//@hasService.0 //@hasService.1"
+  <bill id="5" services="//@hasService.0 //@hasService.10 //@hasService.8"
       customer="//@hasCustomer.0"/>
   <bill id="1"
-      services="//@hasService.2"
+      services="//@hasService.2 //@hasService.0"
       customer="//@hasCustomer.1"/>
   <bill id="2"
-      services="//@hasService.3 //@hasService.7"
+      services="//@hasService.3 //@hasService.0 //@hasService.7"
       customer="//@hasCustomer.2"/>
   <bill id="3"
-      services="//@hasService.7 //@hasService.8"
+      services="//@hasService.7 //@hasService.1 //@hasService.8"
       customer="//@hasCustomer.3"/>
   <bill id="4"
-      services="//@hasService.0 //@hasService.7"
+      services="//@hasService.0 //@hasService.7 //@hasService.8 //@hasService.1"
       customer="//@hasCustomer.4"/>
 </car_wash:CarWash>

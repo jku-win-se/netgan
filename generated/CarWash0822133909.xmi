@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<car_wash:CarWash xmlns:xmi="http://www.omg.org/XMI" xmlns:car_wash="http://www.example.org/car_wash" name="name1057" xmi:version="2.0">
+  <hasCustomer name="name1078" age="64" id="35"/>
+  <hasCustomer name="name1081" age="12" id="56">
+    <hasCar id="36" colour="colour1080" receivedServices=" //@hasService.4 //@hasService.5 //@hasService.6 //@hasService.7 //@hasService.8"/>
+  </hasCustomer>
+  <hasCustomer name="name1083" age="61" id="80"/>
+  <hasCustomer name="name1092" age="78" id="80"/>
+  <hasCustomer name="name1097" age="76" id="13">
+    <hasCar id="53" colour="colour1082" receivedServices="//@hasService.5 //@hasService.8 //@hasService.10 //@hasService.12 //@hasService.14"/>
+    <hasCar id="78" colour="colour1087" receivedServices="//@hasService.0 //@hasService.1 "/>
+  </hasCustomer>
+  <hasCustomer name="name1099" age="57" id="11"/>
+  <bill id="44" services="//@hasService.0   //@hasService.8" total_cost="30" payment="credit"/>
+  <bill id="65" services="//@hasService.3 //@hasService.4 //@hasService.7 //@hasService.8 " total_cost="76"/>
+  <bill id="29" services="//@hasService.3 //@hasService.5 //@hasService.7" total_cost="61"/>
+  <hasService id="72" cost="55" s_name="s_name1058"/>
+  <hasService id="48" cost="80" s_name="s_name1060"/>
+  <hasService id="70" cost="73" s_name="s_name1062"/>
+  <hasService id="57" cost="68" s_name="s_name1064"/>
+  <hasService id="74" cost="31" s_name="s_name1065"/>
+  <hasService id="45" cost="71" s_name="s_name1066"/>
+  <hasService id="55" cost="52" s_name="s_name1067"/>
+  <hasService id="65" cost="24" s_name="s_name1068"/>
+  <hasService id="54" cost="31" s_name="s_name1070"/>
+  <hasService id="73" cost="68" s_name="s_name1072"/>
+  <hasService id="48" cost="23" s_name="s_name1073"/>
+  <hasService id="24" cost="46" s_name="s_name1074"/>
+  <hasService id="20" cost="63" s_name="s_name1075"/>
+  <hasService id="68" cost="64" s_name="s_name1076"/>
+  <hasService id="59" cost="59" s_name="s_name1077"/>
+</car_wash:CarWash>

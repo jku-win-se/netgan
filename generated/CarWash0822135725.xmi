@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<car_wash:CarWash xmlns:xmi="http://www.omg.org/XMI" xmlns:car_wash="http://www.example.org/car_wash" name="name141" xmi:version="2.0">
+  <hasService id="39" s_name="s_name142" cost="27"/>
+  <hasService id="61" s_name="s_name143" cost="24"/>
+  <hasService id="40" s_name="s_name145" cost="44"/>
+  <hasService id="11" s_name="s_name146" cost="28"/>
+  <hasService id="31" s_name="s_name147" cost="19"/>
+  <hasService id="62" s_name="s_name149" cost="52"/>
+  <hasService id="52" s_name="s_name151" cost="30"/>
+  <hasService id="54" s_name="s_name152" cost="61"/>
+  <hasService id="74" s_name="s_name153" cost="10"/>
+  <hasCustomer id="54" age="70" name="name154"/>
+  <hasCustomer id="62" age="71" name="name159">
+    <hasCar colour="colour162" receivedServices="//@hasService.0  //@hasService.5" id="19"/>
+  </hasCustomer>
+  <hasCustomer id="61" age="60" name="name163">
+    <hasCar colour="colour160" receivedServices="//@hasService.0 //@hasService.1  //@hasService.4 //@hasService.7" id="45"/>
+  </hasCustomer>
+  <hasCustomer id="69" age="17" name="name165">
+    <hasCar colour="colour158" receivedServices="//@hasService.0 //@hasService.1 //@hasService.4 //@hasService.5 //@hasService.6 //@hasService.7" id="47"/>
+    <hasCar colour="colour164" receivedServices=" //@hasService.4  //@hasService.6 //@hasService.7 //@hasService.8" id="78"/>
+    <hasCar colour="colour166" receivedServices="//@hasService.0 //@hasService.1 //@hasService.4 //@hasService.5" id="68"/>
+    <hasCar colour="colour167" receivedServices=" //@hasService.4 //@hasService.5 //@hasService.6" id="51"/>
+  </hasCustomer>
+  <bill total_cost="33" customer="" services="//@hasService.0 //@hasService.1 //@hasService.5  //@hasService.6" payment="credit" id="33"/>
+  <bill total_cost="37" customer="//@hasCustomer.0 //@hasCustomer.1 //@hasCustomer.3" services="//@hasService.0 //@hasService.1 //@hasService.4 //@hasService.5 " payment="credit" id="70"/>
+  <bill total_cost="30" customer="//@hasCustomer.3" services="//@hasService.4  //@hasService.7" id="38"/>
+  <bill total_cost="71" customer="//@hasCustomer.1 " services="//@hasService.0 //@hasService.4" payment="credit" id="64"/>
+</car_wash:CarWash>

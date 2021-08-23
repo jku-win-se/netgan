@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<car_wash:CarWash xmlns:xmi="http://www.omg.org/XMI" xmlns:car_wash="http://www.example.org/car_wash" name="name45" xmi:version="2.0">
+  <hasService s_name="s_name46" cost="49" id="69"/>
+  <hasService s_name="s_name49" cost="77" id="31"/>
+  <hasService s_name="s_name53" cost="17" id="41"/>
+  <hasService s_name="s_name56" cost="55" id="50"/>
+  <hasService s_name="s_name57" cost="56" id="23"/>
+  <hasService s_name="s_name58" cost="47" id="29"/>
+  <hasService s_name="s_name60" cost="65" id="80"/>
+  <hasService s_name="s_name62" cost="41" id="69"/>
+  <hasService s_name="s_name63" cost="50" id="61"/>
+  <hasService s_name="s_name65" cost="42" id="75"/>
+  <bill id="38" total_cost="65" services="  //@hasService.2 "/>
+  <bill id="29" total_cost="27" payment="credit" services="//@hasService.0   //@hasService.1 //@hasService.4"/>
+  <bill id="22" total_cost="61" services="//@hasService.0  //@hasService.4  "/>
+  <bill id="40" total_cost="78" payment="credit" services="//@hasService.0  //@hasService.4"/>
+  <bill id="17" total_cost="42" payment="credit" services="//@hasService.3"/>
+  <hasCustomer age="28" name="name66" id="34"/>
+  <hasCustomer age="78" name="name69" id="72"/>
+  <hasCustomer age="44" name="name71" id="38">
+    <hasCar colour="colour68" receivedServices="//@hasService.0 //@hasService.1 //@hasService.2" id="43"/>
+    <hasCar colour="colour73" receivedServices="  " id="42"/>
+  </hasCustomer>
+  <hasCustomer age="71" name="name76" id="74">
+    <hasCar colour="colour86" receivedServices="//@hasService.1     //@hasService.5" id="28"/>
+  </hasCustomer>
+  <hasCustomer age="79" name="name80" id="77"/>
+  <hasCustomer age="46" name="name82" id="62">
+    <hasCar colour="colour67" receivedServices="//@hasService.0 //@hasService.1 " id="51"/>
+  </hasCustomer>
+  <hasCustomer age="15" name="name87" id="18">
+    <hasCar colour="colour70" receivedServices=" //@hasService.1  //@hasService.2 //@hasService.4 " id="13"/>
+  </hasCustomer>
+</car_wash:CarWash>

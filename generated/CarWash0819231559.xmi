@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<car_wash:CarWash xmlns:xmi="http://www.omg.org/XMI" xmlns:car_wash="http://www.example.org/car_wash" name="name89" xmi:version="2.0">
+  <bill total_cost="41" id="78" services="//@hasService.0 //@hasService.1 //@hasService.3 //@hasService.4 //@hasService.5  //@hasService.7 "/>
+  <bill total_cost="50" payment="credit" id="16" services="//@hasService.5  //@hasService.6 //@hasService.7 //@hasService.10 //@hasService.11"/>
+  <bill total_cost="78" payment="credit" id="31" services="//@hasService.3 //@hasService.4 //@hasService.5  //@hasService.6 //@hasService.8 //@hasService.9"/>
+  <hasService s_name="s_name90" id="29" cost="17"/>
+  <hasService s_name="s_name91" id="73" cost="43"/>
+  <hasService s_name="s_name92" id="13" cost="55"/>
+  <hasService s_name="s_name93" id="51" cost="53"/>
+  <hasService s_name="s_name95" id="73" cost="53"/>
+  <hasService s_name="s_name96" id="43" cost="55"/>
+  <hasService s_name="s_name99" id="56" cost="62"/>
+  <hasService s_name="s_name101" id="68" cost="50"/>
+  <hasService s_name="s_name103" id="15" cost="11"/>
+  <hasService s_name="s_name104" id="74" cost="23"/>
+  <hasService s_name="s_name106" id="32" cost="62"/>
+  <hasService s_name="s_name109" id="56" cost="17"/>
+  <hasCustomer name="name110" age="32" id="53">
+    <hasCar colour="colour127" receivedServices="//@hasService.4 " id="35"/>
+  </hasCustomer>
+  <hasCustomer name="name113" age="37" id="31">
+    <hasCar colour="colour122" receivedServices="//@hasService.2 //@hasService.4  //@hasService.7" id="32"/>
+  </hasCustomer>
+  <hasCustomer name="name115" age="57" id="12"/>
+  <hasCustomer name="name120" age="58" id="44">
+    <hasCar colour="colour116" id="63"/>
+  </hasCustomer>
+  <hasCustomer name="name126" age="71" id="35">
+    <hasCar colour="colour128" receivedServices="//@hasService.2 //@hasService.3  " id="63"/>
+    <hasCar colour="colour130" receivedServices="//@hasService.0 //@hasService.1 //@hasService.3 //@hasService.5   //@hasService.7 //@hasService.8 " id="61"/>
+  </hasCustomer>
+</car_wash:CarWash>

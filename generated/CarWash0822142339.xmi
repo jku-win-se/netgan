@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<car_wash:CarWash xmlns:xmi="http://www.omg.org/XMI" xmlns:car_wash="http://www.example.org/car_wash" name="name375" xmi:version="2.0">
+  <hasService s_name="s_name376" id="22" cost="42"/>
+  <hasService s_name="s_name377" id="48" cost="15"/>
+  <hasService s_name="s_name378" id="43" cost="35"/>
+  <hasService s_name="s_name379" id="32" cost="55"/>
+  <hasService s_name="s_name380" id="76" cost="74"/>
+  <hasService s_name="s_name381" id="53" cost="11"/>
+  <hasService s_name="s_name382" id="34" cost="61"/>
+  <hasService s_name="s_name383" id="71" cost="22"/>
+  <hasService s_name="s_name385" id="24" cost="27"/>
+  <hasService s_name="s_name386" id="21" cost="11"/>
+  <hasService s_name="s_name389" id="45" cost="51"/>
+  <hasCustomer age="56" id="23" name="name390"/>
+  <hasCustomer age="64" id="49" name="name395"/>
+  <hasCustomer age="80" id="32" name="name400">
+    <hasCar colour="colour394" id="16" receivedServices="//@hasService.0 //@hasService.1 //@hasService.2 //@hasService.6 //@hasService.7 //@hasService.8 //@hasService.9 "/>
+    <hasCar colour="colour401" id="11" receivedServices="//@hasService.0 //@hasService.5 //@hasService.7 //@hasService.8 //@hasService.9"/>
+    <hasCar colour="colour402" id="40" receivedServices="//@hasService.1 //@hasService.2 //@hasService.5 //@hasService.7 //@hasService.8 //@hasService.9"/>
+    <hasCar colour="colour403" id="51" receivedServices="//@hasService.0 //@hasService.1 //@hasService.5 //@hasService.7 //@hasService.8 //@hasService.9"/>
+  </hasCustomer>
+  <bill total_cost="21" id="42" services="//@hasService.1 //@hasService.3"/>
+  <bill total_cost="11" services="//@hasService.0 //@hasService.5 //@hasService.7" customer="//@hasCustomer.0 //@hasCustomer.2" payment="credit" id="55"/>
+  <bill total_cost="78" services="//@hasService.0 //@hasService.1 //@hasService.2 //@hasService.4 //@hasService.6 //@hasService.7  //@hasService.8 //@hasService.9" customer="//@hasCustomer.0  " payment="credit" id="32"/>
+</car_wash:CarWash>

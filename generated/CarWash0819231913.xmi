@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<car_wash:CarWash xmlns:xmi="http://www.omg.org/XMI" xmlns:car_wash="http://www.example.org/car_wash" name="name353" xmi:version="2.0">
+  <bill total_cost="51" id="74" services="//@hasService.0 //@hasService.1 //@hasService.2 //@hasService.5 //@hasService.6   //@hasService.8"/>
+  <bill total_cost="21" id="37" services="//@hasService.1 //@hasService.5 //@hasService.12"/>
+  <bill total_cost="77" payment="credit" id="16" services="//@hasService.0 //@hasService.1 //@hasService.2 //@hasService.3 //@hasService.4  //@hasService.5 //@hasService.6 //@hasService.7  //@hasService.8    //@hasService.12"/>
+  <hasService s_name="s_name354" id="52" cost="29"/>
+  <hasService s_name="s_name355" id="59" cost="34"/>
+  <hasService s_name="s_name356" id="57" cost="28"/>
+  <hasService s_name="s_name357" id="27" cost="10"/>
+  <hasService s_name="s_name358" id="56" cost="22"/>
+  <hasService s_name="s_name360" id="49" cost="67"/>
+  <hasService s_name="s_name361" id="24" cost="25"/>
+  <hasService s_name="s_name363" id="13" cost="51"/>
+  <hasService s_name="s_name365" id="23" cost="50"/>
+  <hasService s_name="s_name370" id="16" cost="25"/>
+  <hasService s_name="s_name371" id="22" cost="43"/>
+  <hasService s_name="s_name372" id="54" cost="21"/>
+  <hasService s_name="s_name373" id="70" cost="18"/>
+  <hasCustomer name="name374" age="55" id="48">
+    <hasCar colour="colour376" receivedServices="//@hasService.2 //@hasService.3 " id="29"/>
+    <hasCar colour="colour385" receivedServices="//@hasService.2 //@hasService.3  //@hasService.5  " id="79"/>
+  </hasCustomer>
+  <hasCustomer name="name377" age="61" id="44"/>
+  <hasCustomer name="name379" age="51" id="19">
+    <hasCar colour="colour380" receivedServices="//@hasService.0  //@hasService.7" id="27"/>
+    <hasCar colour="colour381" receivedServices="//@hasService.2 //@hasService.3 //@hasService.4 //@hasService.5 //@hasService.6 //@hasService.9" id="35"/>
+  </hasCustomer>
+  <hasCustomer name="name382" age="69" id="39"/>
+  <hasCustomer name="name388" age="15" id="26"/>
+</car_wash:CarWash>

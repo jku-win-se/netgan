@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<car_wash:CarWash xmlns:xmi="http://www.omg.org/XMI" xmlns:car_wash="http://www.example.org/car_wash" name="name397" xmi:version="2.0">
+  <hasCustomer name="name421" age="34" id="24"/>
+  <hasCustomer name="name428" age="57" id="73"/>
+  <hasCustomer name="name434" age="49" id="46"/>
+  <hasCustomer name="name439" age="28" id="17"/>
+  <bill id="17" services="//@hasService.0   //@hasService.3  //@hasService.6   //@hasService.9" total_cost="13" payment="credit"/>
+  <hasService id="48" cost="15" s_name="s_name398"/>
+  <hasService id="71" cost="68" s_name="s_name401"/>
+  <hasService id="62" cost="36" s_name="s_name403"/>
+  <hasService id="57" cost="24" s_name="s_name404"/>
+  <hasService id="46" cost="77" s_name="s_name405"/>
+  <hasService id="32" cost="79" s_name="s_name407"/>
+  <hasService id="37" cost="67" s_name="s_name408"/>
+  <hasService id="51" cost="63" s_name="s_name410"/>
+  <hasService id="14" cost="66" s_name="s_name413"/>
+  <hasService id="57" cost="22" s_name="s_name415"/>
+  <hasService id="33" cost="21" s_name="s_name416"/>
+  <hasService id="21" cost="10" s_name="s_name417"/>
+</car_wash:CarWash>

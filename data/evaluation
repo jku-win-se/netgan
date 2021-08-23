@@ -1,0 +1,224 @@
+______________________________________________________________________Real452
+Degrees statistics(max,min,mean)= (40, 2, 8.071428571428571)
+Node activity= 2.732142857142857
+Node references activity= 3.122448979591837
+Edge references activity= 9.224489795918368
+Multiplex participation coefficient= 0.5672224469455992
+Pairwise multiplexity= 0.11734693877551024
+______________________________________________________________________Real432
+Degrees statistics(max,min,mean)= (38, 1, 8.150943396226415)
+Node activity= 2.509433962264151
+Node references activity= 2.7142857142857144
+Edge references activity= 8.816326530612246
+Multiplex participation coefficient= 0.4738140033424841
+Pairwise multiplexity= 0.10152740341419586
+______________________________________________________________________Real400
+Degrees statistics(max,min,mean)= (25, 1, 9.571428571428571)
+Node activity= 2.5238095238095237
+Node references activity= 2.1632653061224487
+Edge references activity= 8.204081632653061
+Multiplex participation coefficient= 0.4566657429809816
+Pairwise multiplexity= 0.09863945578231291
+______________________________________________________________________Real352
+Degrees statistics(max,min,mean)= (46, 1, 5.866666666666666)
+Node activity= 2.7
+Node references activity= 3.306122448979592
+Edge references activity= 7.183673469387755
+Multiplex participation coefficient= 0.6052823097562647
+Pairwise multiplexity= 0.11587301587301586
+______________________________________________________________________Real334
+Degrees statistics(max,min,mean)= (42, 1, 5.758620689655173)
+Node activity= 2.6379310344827585
+Node references activity= 3.122448979591837
+Edge references activity= 6.816326530612245
+Multiplex participation coefficient= 0.6164898958048874
+Pairwise multiplexity= 0.10919540229885058
+______________________________________________________________________Real262
+Degrees statistics(max,min,mean)= (28, 1, 6.390243902439025)
+Node activity= 2.6341463414634148
+Node references activity= 2.2040816326530615
+Edge references activity= 5.346938775510204
+Multiplex participation coefficient= 0.5510364778250957
+Pairwise multiplexity= 0.10917537746806039
+______________________________________________________________________Real140
+Degrees statistics(max,min,mean)= (21, 2, 4.666666666666667)
+Node activity= 2.566666666666667
+Node references activity= 1.5714285714285714
+Edge references activity= 2.857142857142857
+Multiplex participation coefficient= 0.6153866587957496
+Pairwise multiplexity= 0.10158730158730159
+______________________________________________________________________262-250
+Degrees statistics(max,min,mean)= (18, 1, 6.097560975609756)
+Node activity= 2.4146341463414633
+Node references activity= 2.020408163265306
+Edge references activity= 5.1020408163265305
+Multiplex participation coefficient= 0.5589401799053191
+Pairwise multiplexity= 0.09175377468060396
+______________________________________________________________________262-250
+Degrees statistics(max,min,mean)= (14, 1, 6.097560975609756)
+Node activity= 2.5121951219512195
+Node references activity= 2.1020408163265305
+Edge references activity= 5.1020408163265305
+Multiplex participation coefficient= 0.6113467954957547
+Pairwise multiplexity= 0.09872241579558654
+______________________________________________________________________262-150
+Degrees statistics(max,min,mean)= (10, 1, 3.658536585365854)
+Node activity= 2.0
+Node references activity= 1.673469387755102
+Edge references activity= 3.061224489795918
+Multiplex participation coefficient= 0.45758501096915727
+Pairwise multiplexity= 0.05807200929152149
+______________________________________________________________________262-150
+Degrees statistics(max,min,mean)= (9, 1, 3.658536585365854)
+Node activity= 2.024390243902439
+Node references activity= 1.6938775510204083
+Edge references activity= 3.061224489795918
+Multiplex participation coefficient= 0.4695753215468663
+Pairwise multiplexity= 0.059233449477351915
+______________________________________________________________________262-350
+Degrees statistics(max,min,mean)= (18, 2, 8.536585365853659)
+Node activity= 2.6341463414634148
+Node references activity= 2.2040816326530615
+Edge references activity= 7.142857142857143
+Multiplex participation coefficient= 0.5981352513503945
+Pairwise multiplexity= 0.11033681765389082
+______________________________________________________________________262-350
+Degrees statistics(max,min,mean)= (21, 2, 8.536585365853659)
+Node activity= 2.5121951219512195
+Node references activity= 2.1020408163265305
+Edge references activity= 7.142857142857143
+Multiplex participation coefficient= 0.5803218597927412
+Pairwise multiplexity= 0.09872241579558654
+______________________________________________________________________262-400
+Degrees statistics(max,min,mean)= (27, 1, 9.75609756097561)
+Node activity= 2.707317073170732
+Node references activity= 2.2653061224489797
+Edge references activity= 8.16326530612245
+Multiplex participation coefficient= 0.6256937384418398
+Pairwise multiplexity= 0.11614401858304298
+______________________________________________________________________262-400
+Degrees statistics(max,min,mean)= (26, 2, 9.75609756097561)
+Node activity= 2.731707317073171
+Node references activity= 2.2857142857142856
+Edge references activity= 8.16326530612245
+Multiplex participation coefficient= 0.6148670438120847
+Pairwise multiplexity= 0.11846689895470383
+______________________________________________________________________262-450
+Degrees statistics(max,min,mean)= (24, 4, 10.975609756097562)
+Node activity= 2.7804878048780486
+Node references activity= 2.326530612244898
+Edge references activity= 9.183673469387756
+Multiplex participation coefficient= 0.6624705140295396
+Pairwise multiplexity= 0.12195121951219512
+______________________________________________________________________262-450
+Degrees statistics(max,min,mean)= (21, 1, 10.975609756097562)
+Node activity= 2.707317073170732
+Node references activity= 2.2653061224489797
+Edge references activity= 9.183673469387756
+Multiplex participation coefficient= 0.638444489877772
+Pairwise multiplexity= 0.1173054587688734
+______________________________________________________________________432-350
+Degrees statistics(max,min,mean)= (18, 1, 6.60377358490566)
+Node activity= 2.188679245283019
+Node references activity= 2.3673469387755106
+Edge references activity mean= 7.142857142857143
+Multiplex participation coefficient= 0.4880474290975481
+Pairwise multiplexity= 0.07367475292003593
+______________________________________________________________________432-350
+Degrees statistics(max,min,mean)= (18, 1, 6.60377358490566)
+Node activity= 2.3207547169811322
+Node references activity= 2.5102040816326534
+Edge references activity mean= 7.142857142857143
+Multiplex participation coefficient= 0.5151346722958157
+Pairwise multiplexity= 0.08355795148247978
+______________________________________________________________________432-350
+Degrees statistics(max,min,mean)= (22, 1, 6.60377358490566)
+Node activity= 2.2641509433962264
+Node references activity= 2.4489795918367347
+Edge references activity mean= 7.142857142857143
+Multiplex participation coefficient= 0.4874415032620234
+Pairwise multiplexity= 0.07996406109613657
+______________________________________________________________________432-350
+Degrees statistics(max,min,mean)= (17, 1, 6.60377358490566)
+Node activity= 2.2264150943396226
+Node references activity= 2.4081632653061225
+Edge references activity mean= 7.142857142857143
+Multiplex participation coefficient= 0.48983371943715237
+Pairwise multiplexity= 0.07726864330637916
+______________________________________________________________________432-350
+Degrees statistics(max,min,mean)= (23, 1, 6.60377358490566)
+Node activity= 2.3207547169811322
+Node references activity= 2.5102040816326534
+Edge references activity mean= 7.142857142857143
+Multiplex participation coefficient= 0.49872731319113034
+Pairwise multiplexity= 0.08535489667565138
+______________________________________________________________________432-400
+Degrees statistics(max,min,mean)= (27, 1, 7.547169811320755)
+Node activity= 2.339622641509434
+Node references activity= 2.5300592334494773519156122448979593
+Edge references activity mean= 8.16326530612245
+Multiplex participation coefficient= 0.48724310871701293
+Pairwise multiplexity= 0.0862533692722372
+______________________________________________________________________432-400
+Degrees statistics(max,min,mean)= (22, 1, 7.547169811320755)
+Node activity= 2.188679245283019
+Node references activity= 2.3673469387755106
+Edge references activity mean= 8.16326530612245
+Multiplex participation coefficient= 0.4588998919447247
+Pairwise multiplexity= 0.07547169811320754
+______________________________________________________________________432-450
+Degrees statistics(max,min,mean)= (26, 1, 8.49056603773585)
+Node activity= 2.3773584905660377
+Node references activity= 2.5714285714285716
+Edge references activity mean= 9.183673469387756
+Multiplex participation coefficient= 0.5147120073185104
+Pairwise multiplexity= 0.09074573225516622
+______________________________________________________________________432-450
+Degrees statistics(max,min,mean)= (21, 1, 8.49056603773585)
+Node activity= 2.3773584905660377
+Node references activity= 2.5714285714285716
+Edge references activity mean= 9.183673469387756
+Multiplex participation coefficient= 0.5069904759658801
+Pairwise multiplexity= 0.08984725965858041
+______________________________________________________________________432-450
+Degrees statistics(max,min,mean)= (30, 1, 8.49056603773585)
+Node activity= 2.3962264150943398
+Node references activity= 2.5918367346938775
+Edge references activity mean= 9.183673469387756
+Multiplex participation coefficient= 0.516359310218686
+Pairwise multiplexity= 0.09254267744833783
+______________________________________________________________________432-450
+Degrees statistics(max,min,mean)= (26, 1, 8.49056603773585)
+Node activity= 2.3962264150943398
+Node references activity= 2.5918367346938775
+Edge references activity mean= 9.183673469387756
+Multiplex participation coefficient= 0.5348312924941471
+Pairwise multiplexity= 0.0889487870619946
+______________________________________________________________________432-250
+Degrees statistics(max,min,mean)= (21, 1, 4.716981132075472)
+Node activity= 1.9433962264150944
+Node references activity= 2.1020408163265305
+Edge references activity mean= 5.1020408163265305
+Multiplex participation coefficient= 0.3712413175625762
+Pairwise multiplexity= 0.05929919137466308
+______________________________________________________________________432-250
+Degrees statistics(max,min,mean)= (15, 1, 4.716981132075472)
+Node activity= 1.9433962264150944
+Node references activity= 2.1020408163265305
+Edge references activity mean= 5.1020408163265305
+Multiplex participation coefficient= 0.3992894228571758
+Pairwise multiplexity= 0.055705300988319856
+______________________________________________________________________432-150
+Degrees statistics(max,min,mean)= (10, 1, 2.830188679245283)
+Node activity= 1.4528301886792452
+Node references activity= 1.5714285714285714
+Edge references activity mean= 3.061224489795918
+Multiplex participation coefficient= 0.2075138861158253
+Pairwise multiplexity= 0.02425876010781671
+______________________________________________________________________432-150
+Degrees statistics(max,min,mean)= (11, 1, 2.830188679245283)
+Node activity= 1.6226415094339623
+Node references activity= 1.7551020408163267
+Edge references activity mean= 3.061224489795918
+Multiplex participation coefficient= 0.28334341084114767
+Pairwise multiplexity= 0.03504043126684636

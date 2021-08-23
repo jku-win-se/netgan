@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<car_wash:CarWash xmlns:xmi="http://www.omg.org/XMI" xmlns:car_wash="http://www.example.org/car_wash" name="name265" xmi:version="2.0">
+  <bill total_cost="72" payment="credit" id="17" services="//@hasService.0  //@hasService.4 //@hasService.6 "/>
+  <hasService s_name="s_name266" id="11" cost="58"/>
+  <hasService s_name="s_name268" id="43" cost="57"/>
+  <hasService s_name="s_name269" id="23" cost="64"/>
+  <hasService s_name="s_name271" id="10" cost="27"/>
+  <hasService s_name="s_name272" id="35" cost="55"/>
+  <hasService s_name="s_name273" id="34" cost="69"/>
+  <hasService s_name="s_name276" id="68" cost="78"/>
+  <hasService s_name="s_name277" id="60" cost="14"/>
+  <hasService s_name="s_name282" id="74" cost="28"/>
+  <hasService s_name="s_name283" id="30" cost="35"/>
+  <hasCustomer name="name286" age="23" id="60">
+    <hasCar colour="colour298" receivedServices="//@hasService.1  " id="48"/>
+  </hasCustomer>
+  <hasCustomer name="name289" age="58" id="35"/>
+  <hasCustomer name="name291" age="60" id="49">
+    <hasCar colour="colour297" receivedServices="//@hasService.0   //@hasService.3 //@hasService.4  //@hasService.7" id="15"/>
+  </hasCustomer>
+  <hasCustomer name="name294" age="34" id="79"/>
+  <hasCustomer name="name300" age="41" id="52">
+    <hasCar colour="colour299" receivedServices=" //@hasService.2 //@hasService.3 //@hasService.4 //@hasService.5   //@hasService.7  " id="73"/>
+    <hasCar colour="colour301" receivedServices="//@hasService.3 //@hasService.6 " id="64"/>
+    <hasCar colour="colour306" receivedServices="//@hasService.0  //@hasService.1 //@hasService.2  //@hasService.3 //@hasService.4   //@hasService.7" id="58"/>
+  </hasCustomer>
+  <hasCustomer name="name305" age="79" id="75">
+    <hasCar colour="colour287" receivedServices="//@hasService.5 //@hasService.7" id="41"/>
+    <hasCar colour="colour290" receivedServices="//@hasService.0  //@hasService.1 //@hasService.2  //@hasService.3 //@hasService.4  //@hasService.6 //@hasService.7    " id="57"/>
+  </hasCustomer>
+  <hasCustomer name="name307" age="11" id="24"/>
+</car_wash:CarWash>

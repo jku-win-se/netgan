@@ -100,7 +100,6 @@ def multiplex_participation_coefficient(matrix, ref_types):
             sigma += pow((temp / degrees[i]), 2)
             temp = 0
         MPC[i] = (R / (R - 1)) * (1 - sigma)
-    # print("MPC mean=", MPC.mean())
     return MPC.mean()
 
 
@@ -125,7 +124,6 @@ def pairwise_multiplexity(matrix, ref_types):
             for r in active_vectors:
                 sigma += r[i] * r[j]
             Q.append(sigma / mtx_len)
-    # print("Q mean=", np.asarray(Q).mean())
     return np.asarray(Q).mean()
 
 

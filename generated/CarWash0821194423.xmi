@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<car_wash:CarWash xmlns:xmi="http://www.omg.org/XMI" xmlns:car_wash="http://www.example.org/car_wash" name="name113" xmi:version="2.0">
+  <hasCustomer name="name126" age="25" id="27"/>
+  <hasCustomer name="name131" age="39" id="22"/>
+  <hasCustomer name="name135" age="64" id="54">
+    <hasCar id="10" receivedServices="//@hasService.0 //@hasService.1 //@hasService.5 //@hasService.7" colour="colour129"/>
+  </hasCustomer>
+  <hasCustomer name="name137" age="63" id="71">
+    <hasCar id="38" receivedServices="//@hasService.0 //@hasService.4" colour="colour127"/>
+    <hasCar id="10" receivedServices="//@hasService.0 //@hasService.1 //@hasService.2  //@hasService.6 //@hasService.8" colour="colour128"/>
+    <hasCar id="67" receivedServices="//@hasService.0 //@hasService.1  //@hasService.4 //@hasService.5  //@hasService.6 //@hasService.7 " colour="colour130"/>
+    <hasCar id="12" receivedServices="//@hasService.1 //@hasService.4" colour="colour132"/>
+    <hasCar id="37" receivedServices="//@hasService.1 //@hasService.3 //@hasService.4 " colour="colour136"/>
+    <hasCar id="68" receivedServices="//@hasService.0 //@hasService.4  //@hasService.7" colour="colour138"/>
+    <hasCar id="45" receivedServices="//@hasService.0 //@hasService.1  //@hasService.6" colour="colour139"/>
+    <hasCar id="16" receivedServices="//@hasService.1 //@hasService.5  //@hasService.6 //@hasService.8" colour="colour140"/>
+  </hasCustomer>
+  <bill payment="credit" services="//@hasService.0 //@hasService.1 //@hasService.5  //@hasService.6 //@hasService.7 //@hasService.8" id="33" total_cost="55"/>
+  <bill services="//@hasService.0 //@hasService.1 //@hasService.2 //@hasService.4 //@hasService.6" id="70" total_cost="45"/>
+  <bill payment="credit" services="//@hasService.1 //@hasService.5  //@hasService.6 //@hasService.7" id="23" total_cost="13"/>
+  <hasService id="50" s_name="s_name114" cost="57"/>
+  <hasService id="22" s_name="s_name115" cost="21"/>
+  <hasService id="51" s_name="s_name116" cost="11"/>
+  <hasService id="75" s_name="s_name117" cost="67"/>
+  <hasService id="62" s_name="s_name119" cost="46"/>
+  <hasService id="77" s_name="s_name120" cost="12"/>
+  <hasService id="46" s_name="s_name122" cost="45"/>
+  <hasService id="47" s_name="s_name123" cost="71"/>
+  <hasService id="43" s_name="s_name125" cost="76"/>
+</car_wash:CarWash>

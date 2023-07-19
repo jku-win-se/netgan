@@ -6,7 +6,7 @@
 Implementation of the method proposed in the MDE intelligence 2023 paper.
 
 
-<p align="center" size="0.5">
+<p align="center">
  ![Framework](https://github.com/AbbasRahimi/netgan/assets/8625909/7abc932d-1ab1-469c-8373-bbe72bf3feba)
 </p>
  

@@ -7,3 +7,4 @@ powerlaw
 python-igraph
 networkx
 numba
+pyecore

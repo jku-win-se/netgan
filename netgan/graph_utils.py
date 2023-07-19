@@ -8,7 +8,7 @@ def plot_graph_from_sparse_matrix(sparse_matrix, draw_type="networkx"):
      An adjacency matrix representation of a graph
     """
     print(sparse_matrix.shape)
-    G = nx.from_scipy_sparse_matrix(sparse_matrix)
+    G = nx.from_scipy_sparse_array(sparse_matrix)
     print("graph nodes: ")
     print(list(G.nodes()))
     if draw_type == "networkx":
@@ -25,7 +25,7 @@ def plot_graph(graph, draw_type="networkx"):
     # print(graph.shape)
     print("graph: ")
     sparse_matrix = sp.csr_matrix(graph)
-    G = nx.from_scipy_sparse_matrix(sparse_matrix)
+    G = nx.from_scipy_sparse_array(sparse_matrix)
     print("graph nodes: ")
     print(list(G.nodes()))
     if draw_type == "networkx":
@@ -36,7 +36,7 @@ def plot_graph(graph, draw_type="networkx"):
 
 
 def graph_similarity(sparse_matrix1, sparse_matrix2, r0, r1, i_timeout):
-    g1 = nx.from_scipy_sparse_matrix(sparse_matrix1)
+    g1 = nx.from_scipy_sparse_array(sparse_matrix1)
     sparse_matrix = sp.csr_matrix(sparse_matrix2)
     g2 = nx.from_scipy_sparse_matrix(sparse_matrix)
 
@@ -50,5 +50,5 @@ def graph_similarity(sparse_matrix1, sparse_matrix2, r0, r1, i_timeout):
 if __name__ == "__main__":
     m = [[0, 1, 0], [1, 0, 1], [0, 0, 1]]
     matrix = sp.csr_matrix(m)
-    G = nx.from_scipy_sparse_matrix(matrix)
+    G = nx.from_scipy_sparse_array(matrix)
     plot_graph_from_sparse_matrix(matrix)

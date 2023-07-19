@@ -1,14 +1,12 @@
 # Towards Generating Structurally Realistic Models by Generative Adversarial Networks
 
 
+Implementation of the approach proposed in the paper submitted to the MDE Intelligence 2023 5th Workshop on Artificial Intelligence and Model-driven Engineering.
 
 
-Implementation of the method proposed in the MDE intelligence 2023 paper.
-
-
-<p align="center">
+## The workflow of the proposed approach
  ![Framework](https://github.com/AbbasRahimi/netgan/assets/8625909/7abc932d-1ab1-469c-8373-bbe72bf3feba)
-</p>
+
  
 ## Run the code
  
